@@ -1,0 +1,50 @@
+<div class="container">
+    <h1 class="display-4">Start with a New Merchant Account</h1>
+    <form #userForm='ngForm' (ngSubmit)='add(userForm.value)'>
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" name="firstName" class="form-control" #nametag='ngModel' ngModel required>
+        <div *ngIf="nametag.errors&&nametag.dirty">
+          <div [hidden]='!nametag.errors.required' class="text-danger"> Please Enter a name</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" name="lastName" class="form-control" #nametag2='ngModel' ngModel required>
+        <div *ngIf="nametag2.errors&&nametag2.dirty">
+          <div [hidden]='!nametag2.errors.required' class="text-danger"> Please Enter a name</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" #nametag1='ngModel' ngModel required>
+        <div *ngIf="nametag1.errors&&nametag1.dirty">
+          <div [hidden]='!nametag1.errors.required' class="text-danger"> Please Enter Email ID</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Store Name</label>
+        <input type="text" name="storeName" class="form-control" #nametag3='ngModel' ngModel required>
+        <div *ngIf="nametag3.errors&&nametag3.dirty">
+          <div [hidden]='!nametag3.errors.required' class="text-danger"> Please Enter Store name</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" name="phone" class="form-control" ngModel maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>Enter a Password</label>
+        <input type="password" name="password" class="form-control" ngModel required minlength="8" #pass='ngModel' pattern="[A-z]+[a-z]+[0-9]+">
+        <div *ngIf="pass.errors&&pass.dirty">
+          <div [hidden]='!pass.errors.required' class="text-danger"> Please Enter a Password</div>
+          <div [hidden]='!pass.errors.minlength' class="text-danger">Password must be atleast 8 characters</div>
+          <div [hidden]='!pass.errors.pattern' class="text-danger">Password does not meet the requirement</div>
+        </div>
+      </div>
+      <div>
+        <input type="submit" [disabled]="!userForm.valid" class="btn btn-primary" value="Create New Account">
+      </div>
+    </form>
+  </div>
+  

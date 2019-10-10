@@ -1,0 +1,46 @@
+<div class="container login-container">
+  <div class="row">
+    <div class="col-md-6 login-form-1">
+      <h3>Customer Login</h3>
+      <form #customerForm='ngForm' (ngSubmit)='cuslogin(customerForm.value)'>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Your Email *" name="email" ngModel/>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Your Password *" name="password" ngModel/>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btnSubmit" value="Login" />
+        </div>
+        <div class="form-group">
+          <a routerLink="" class="ForgetPwd">Forget Password?</a>
+          <a routerLink="" class="changePwd" value="Login">Change Password</a>
+          <br><br><br>
+          <p style="color: rgb(33,150,243);; font-weight: 600;">Don't have an Account yet. Get yourself an Account</p>
+        <a routerLink="/customersignup"><button class="btnSubmit" style="width: 80%">Create New Customer Account </button></a>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 login-form-2">
+      <h3>Merchant Login</h3>
+      <form #merchantForm='ngForm' (ngSubmit)='merlogin(merchantForm.value)'>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Your Email *" name="email" ngModel/>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Your Password *" name="password" ngModel/>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btnSubmit" value="Login" />
+        </div>
+        <div class="form-group">
+          <a routerLink="" class="ForgetPwd" value="Login">Forget Password?</a>
+          <a routerLink="" class="changePwd" value="Login">Change Password</a>
+          <br><br><br>
+          <p style="color: #fff; font-weight: 600;">Want to new platform to start your buisness? Start your buisness here</p>
+        <a routerLink="/merchantsignup"><button class="btnSubmit" style="width: 80%">Create New Merchant Account </button></a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
