@@ -9,10 +9,21 @@ import { Merchant } from './merchantsignup/merchant';
   providedIn: 'root'
 })
 export class CapgservicesService {
+  email: string;
+  password: string;
   customer: Customer;
-  constructor(private http: HttpClient) { }
-login(user: Login) {
-   this.http.post('', user).toPromise().then((data) => console.log(data));
+  response: Customer;
+  constructor(private http: HttpClient) {
+  }
+login(user: Login): Observable<boolean> {
+  this.email = user.email;
+  this.password = user.password;
+  return this.http.post<boolean>('http://localhost:6500/customerlogin?email=' + this.email + '&password=' + this.password, user);
+}
+merchantlogin(user: Login) {
+  this.email = user.email;
+  this.password = user.password;
+  return this.http.post<boolean>('http://localhost:6500/merchantlogin?email=' + this.email + '&password=' + this.password, user);
 }
 setCustomer(customer) {
   this.customer = customer;
@@ -21,10 +32,10 @@ setCustomer(customer) {
 getCustomer() {
   return this.customer;
 }
-signupUser(user: Customer) {
-  this.http.post('http://localhost:6500/customersignup', user).toPromise().then((data) => console.log(data));
+signupUser(user: Customer): Observable<boolean> {
+  return this.http.post<boolean>('http://localhost:6500/customersignup', user);
 }
-signupMerchant(merchant: Merchant) {
-  this.http.post('http://localhost:6500/merchantsignup', merchant).toPromise().then(data => console.log(data));
+signupMerchant(merchant: Merchant): Observable<boolean> {
+  return this.http.post<boolean>('http://localhost:6500/merchantsignup', merchant);
 }
 }

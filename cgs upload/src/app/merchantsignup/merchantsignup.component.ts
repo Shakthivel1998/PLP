@@ -10,16 +10,24 @@ import { Router } from '@angular/router';
 })
 export class MerchantsignupComponent implements OnInit {
   merchant: Merchant;
+  response: boolean;
   constructor(private signupService: CapgservicesService, private router: Router) { }
 
   ngOnInit() {
   }
   add(value) {
     this.merchant = value;
-    this.signupService.signupMerchant(this.merchant);
-    alert('Successfully created');
+    this.signupService.signupMerchant(this.merchant).subscribe(data => this.response = data);
     setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 2000);
+      console.log(this.response);
+      if (!this.response) {
+        alert('Email id already exists');
+      } else {
+        alert('Successfully created');
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1000);
+      }
+    }, 500);
   }
 }
