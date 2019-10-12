@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,11 +58,14 @@ public List<Customer> getCustomer(){
 
 @PostMapping("/customerlogin")
 public  ResponseEntity<Map<String,String>>  customerLogin(@RequestParam String email, @RequestParam String password) {
+	
 	Map<String,String> res = new HashMap<>();
 	try {
 		Customer customer = capstoreServices.customerLogin(email, password);
 		res.put("email", email);
 		res.put("CustomerID",String.valueOf(customer.getCustomerId()));
+		res.put("role", "customer");
+		res.put("isActive", String.valueOf(customer.isActive()));
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	} catch (CustomExceptions e) {
 		e.printStackTrace();
@@ -76,6 +80,8 @@ public ResponseEntity<Map<String,String>>merchantLogin(@RequestParam String emai
 		Merchant merchant = capstoreServices.merchantLogin(email, password);
 		res.put("email", email);
 		res.put("merchantId",String.valueOf(merchant.getMerchantId()));
+		res.put("role", "merchant");
+		res.put("isActive", String.valueOf(merchant.isActive()));
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	} catch (CustomExceptions e) {
 		e.printStackTrace();
@@ -84,6 +90,15 @@ public ResponseEntity<Map<String,String>>merchantLogin(@RequestParam String emai
 	return new ResponseEntity<>(res,HttpStatus.NOT_FOUND);
 }
 
+@PutMapping("/validateuser")
+public boolean validateUser(@RequestParam String email) {
+	try {
+		return capstoreServices.validatecusomer(email);
+	} catch (CustomExceptions e) {
+		e.printStackTrace();
+	}
+	return false;
+}
 	/*
 	 * @PostMapping("/merchantlogin") public boolean merchantLogin(@RequestParam
 	 * String email, @RequestParam String password) { try {

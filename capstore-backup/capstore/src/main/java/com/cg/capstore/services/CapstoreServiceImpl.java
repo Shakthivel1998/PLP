@@ -64,6 +64,7 @@ public class CapstoreServiceImpl implements CapstoreServices {
 	@Override
 	public Customer customerLogin(String email, String password) throws CustomExceptions {
 		Customer customer = customerDao.getCustomerByEmail(email);
+		System.out.println(customer.toString());
 		String enycryptPassword= passwordEncrypt(password);
 		if(!customer.getPassword().equals(enycryptPassword)) {
 			throw new CustomExceptions("Invalid user");
@@ -103,6 +104,18 @@ public class CapstoreServiceImpl implements CapstoreServices {
 	public String passwordDecrypt(String password) {
 		String decrypted = AES.decrypt(passwordEncrypt(password), secret);
 		return decrypted;
+	}
+
+	@Override
+	public boolean validatecusomer(String email) throws CustomExceptions {
+		Customer customer=null;
+		customer=customerDao.getCustomerByEmail(email);
+		if(customer==null) {
+			throw new CustomExceptions("email does not exists..");
+		}
+		customer.setActive(true);
+		customerDao.save(customer);
+		return true;
 	}
 
 }

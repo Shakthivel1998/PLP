@@ -15,4 +15,5 @@ public interface CapstoreServices {
  public Merchant merchantLogin(String email,String password) throws CustomExceptions;
  public String passwordEncrypt(String password);
  public String passwordDecrypt(String password);
+ public boolean validatecusomer(String email) throws CustomExceptions;
 }
