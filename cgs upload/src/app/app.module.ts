@@ -12,6 +12,14 @@ import { MerchantsignupComponent } from './merchantsignup/merchantsignup.compone
 import { CustomersloginComponent } from './customerslogin/customerslogin.component';
 import { ValidateUserComponent } from './validate-user/validate-user.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ForgetpasswordcheckComponent } from './forgetpasswordcheck/forgetpasswordcheck.component';
+import { ForgetpasswordresetComponent } from './forgetpasswordreset/forgetpasswordreset.component';
+import { ChangepasswordcheckComponent } from './changepasswordcheck/changepasswordcheck.component';
+import { ChangepasswordresetComponent } from './changepasswordreset/changepasswordreset.component';
+import { MerchantforgotpasswordcheckComponent } from './merchantforgotpasswordcheck/merchantforgotpasswordcheck.component';
+import { MerchantforgotpasswordresetComponent } from './merchantforgotpasswordreset/merchantforgotpasswordreset.component';
+import { MerchantchangepasswordcheckComponent } from './merchantchangepasswordcheck/merchantchangepasswordcheck.component';
+import { MerchantchangepasswordresetComponent } from './merchantchangepasswordreset/merchantchangepasswordreset.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +28,15 @@ import { HomepageComponent } from './homepage/homepage.component';
     MerchantsignupComponent,
     CustomersloginComponent,
     ValidateUserComponent,
-    HomepageComponent
+    HomepageComponent,
+    ForgetpasswordcheckComponent,
+    ForgetpasswordresetComponent,
+    ChangepasswordcheckComponent,
+    ChangepasswordresetComponent,
+    MerchantforgotpasswordcheckComponent,
+    MerchantforgotpasswordresetComponent,
+    MerchantchangepasswordcheckComponent,
+    MerchantchangepasswordresetComponent
   ],
   imports: [
   BrowserModule,

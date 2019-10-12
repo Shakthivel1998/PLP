@@ -13,6 +13,7 @@ export class CapgservicesService {
   password: string;
   customer: Customer;
   response: Customer;
+  private userUrl = 'http://localhost:6500/';
   constructor(private http: HttpClient) {
   }
 login(user: Login): Observable<boolean> {
@@ -40,5 +41,27 @@ signupMerchant(merchant: Merchant): Observable<boolean> {
 }
 validate(customeremail: string): Observable<any> {
   return this.http.put<any>('http://localhost:6500/validateuser?email=' + customeremail, this.customer);
+}
+detailsValidation(mailid: string) {
+  return this.http.get<Customer>(this.userUrl + 'change/' + mailid);
+
+}
+resetPassword(resetPwd: string, mailId: string) {
+  return this.http.get<Customer>(this.userUrl + 'reset/' + resetPwd + '/' + mailId);
+}
+changepwdDetailsValidation(mailid: string) {
+  return this.http.get<Customer>(this.userUrl + 'check/' + mailid );
+
+}
+
+merchantDetailsValidation(email: string) {
+  console.log(email);
+  return this.http.get<Merchant>(this.userUrl + 'merchantchange/' + email);
+}
+resetMerchantPassword(resetpwd: string, email: string) {
+  return this.http.get<Merchant>(this.userUrl + 'resetMerchant/' + resetpwd + '/'  + email );
+}
+changeMerchantPwdDetailsValidation(email: string) {
+  return this.http.get<Merchant>(this.userUrl + 'checkMerchant?email=' + email);
 }
 }
