@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -99,6 +100,43 @@ public boolean validateUser(@RequestParam String email) {
 	}
 	return false;
 }
+@GetMapping("/change/{mailId}")
+public Customer getEmailId(@PathVariable("mailId") String mailId) throws CustomExceptions {
+	System.out.println(mailId);
+	return capstoreServices.mailidCheck(mailId);
+}
+
+@GetMapping("/reset/{newpwd}/{mailId}")
+public Customer updatePassword(@PathVariable("newpwd") String newpwd, @PathVariable("mailId") String mailId)
+		throws CustomExceptions {
+	System.out.println(newpwd + mailId);
+	return capstoreServices.updatePassword(newpwd, mailId);
+}
+
+@GetMapping("/check/{mailId}")
+public Customer checkEmailId(@PathVariable("mailId") String mailId) throws CustomExceptions {
+	System.out.println(mailId);
+	return capstoreServices.mailidCheck(mailId);
+}
+
+@GetMapping("/merchantchange/{email}")
+public Merchant getMerchantEmailId(@PathVariable("email") String email) throws CustomExceptions {
+	System.out.println(email);
+	return capstoreServices.merchantMailIdCheck(email);
+}
+
+@GetMapping("/resetMerchant/{newpwd}/{email}")
+public Merchant updateMerchantPassword(@PathVariable("newpwd") String newpwd, @PathVariable("email") String email)
+		throws CustomExceptions {
+	System.out.println(email + newpwd);
+	return capstoreServices.updateMerchantPassword(newpwd, email);
+}
+
+@GetMapping("/checkMerchant")
+public Merchant checkMerchantEmail(@RequestParam("email") String email) throws CustomExceptions {
+	return capstoreServices.checkMerchantEmail(email);
+}
+
 	/*
 	 * @PostMapping("/merchantlogin") public boolean merchantLogin(@RequestParam
 	 * String email, @RequestParam String password) { try {

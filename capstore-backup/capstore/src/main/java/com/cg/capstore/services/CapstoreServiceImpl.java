@@ -65,21 +65,21 @@ public class CapstoreServiceImpl implements CapstoreServices {
 	public Customer customerLogin(String email, String password) throws CustomExceptions {
 		Customer customer = customerDao.getCustomerByEmail(email);
 		System.out.println(customer.toString());
-		String enycryptPassword= passwordEncrypt(password);
-		if(!customer.getPassword().equals(enycryptPassword)) {
+		String enycryptPassword = passwordEncrypt(password);
+		if (!customer.getPassword().equals(enycryptPassword)) {
 			throw new CustomExceptions("Invalid user");
 		}
-		return customer;		
+		return customer;
 	}
 
 	@Override
 	public Merchant merchantLogin(String email, String password) throws CustomExceptions {
 		Merchant merchant = merchantDao.getMerchantByEmail(email);
 		String encryptPassword = passwordEncrypt(password);
-		if(!merchant.getPassword().equals(encryptPassword)) {
+		if (!merchant.getPassword().equals(encryptPassword)) {
 			throw new CustomExceptions("Invalid user");
 		}
-		
+
 		return merchant;
 	}
 
@@ -108,9 +108,9 @@ public class CapstoreServiceImpl implements CapstoreServices {
 
 	@Override
 	public boolean validatecusomer(String email) throws CustomExceptions {
-		Customer customer=null;
-		customer=customerDao.getCustomerByEmail(email);
-		if(customer==null) {
+		Customer customer = null;
+		customer = customerDao.getCustomerByEmail(email);
+		if (customer == null) {
 			throw new CustomExceptions("email does not exists..");
 		}
 		customer.setActive(true);
@@ -118,4 +118,80 @@ public class CapstoreServiceImpl implements CapstoreServices {
 		return true;
 	}
 
+	@Override
+	public Customer mailidCheck(String mailId) throws CustomExceptions {
+
+		Customer customer = customerDao.getCustomerByEmail(mailId);
+
+		if (customer.getEmail().equals(mailId)) {
+			return customer;
+		} else {
+			throw new CustomExceptions("Invlaid mailId");
+		}
+
+	}
+
+	@Override
+	public Customer updatePassword(String newpwd, String mailId) throws CustomExceptions {
+
+		Customer customer1 = customerDao.getCustomerByEmail(mailId);
+
+		if (customer1.getPassword().equals(passwordEncrypt(newpwd))) {
+			return null;
+		} else {
+			customer1.setPassword(passwordEncrypt(newpwd));
+			customerDao.save(customer1);
+			return customer1;
+		}
+	}
+
+	@Override
+	public Customer checkEmailId(String mailId) throws CustomExceptions {
+
+		Customer customer = customerDao.getCustomerByEmail(mailId);
+
+		if (customer.getEmail().equals(mailId)) {
+			return customer;
+		} else {
+			throw new CustomExceptions("Invlaid mailId");
+		}
+	}
+
+	@Override
+	public Merchant merchantMailIdCheck(String email) throws CustomExceptions {
+
+		Merchant merchant = merchantDao.getMerchantByEmail(email);
+
+		if (merchant.getEmail().equals(email)) {
+
+			return merchant;
+		} else {
+			throw new CustomExceptions("Invlaid mailId");
+		}
+
+	}
+
+	@Override
+	public Merchant updateMerchantPassword(String newpwd, String email) throws CustomExceptions {
+		Merchant merchant = merchantDao.getMerchantByEmail(email);
+
+		if (merchant.getPassword().equals(passwordEncrypt(newpwd))) {
+			return null;
+		} else {
+			merchant.setPassword(passwordEncrypt(newpwd));
+			merchantDao.save(merchant);
+			return merchant;
+		}
+	}
+
+	@Override
+	public Merchant checkMerchantEmail(String email) throws CustomExceptions {
+		Merchant merchant = merchantDao.getMerchantByEmail(email);
+
+		if (merchant.getEmail().equals(email)) {
+			return merchant;
+		} else {
+			throw new CustomExceptions("Invlaid mailId");
+		}
+	}
 }
