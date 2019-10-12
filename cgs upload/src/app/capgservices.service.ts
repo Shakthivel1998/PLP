@@ -38,4 +38,7 @@ signupUser(user: Customer): Observable<boolean> {
 signupMerchant(merchant: Merchant): Observable<boolean> {
   return this.http.post<boolean>('http://localhost:6500/merchantsignup', merchant);
 }
+validate(customeremail: string): Observable<any> {
+  return this.http.put<any>('http://localhost:6500/validateuser?email=' + customeremail, this.customer);
+}
 }

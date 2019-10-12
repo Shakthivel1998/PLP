@@ -10,13 +10,17 @@ import { CapgservicesService } from './capgservices.service';
 import { CustomersignupComponent } from './customersignup/customersignup.component';
 import { MerchantsignupComponent } from './merchantsignup/merchantsignup.component';
 import { CustomersloginComponent } from './customerslogin/customerslogin.component';
+import { ValidateUserComponent } from './validate-user/validate-user.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersignupComponent,
     MerchantsignupComponent,
-    CustomersloginComponent
+    CustomersloginComponent,
+    ValidateUserComponent,
+    HomepageComponent
   ],
   imports: [
   BrowserModule,

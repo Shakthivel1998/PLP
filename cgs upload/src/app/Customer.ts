@@ -4,5 +4,5 @@ export class Customer {
     email: string;
     phone: number;
     password: string;
-
+    isActive: boolean;
 }

@@ -5,5 +5,5 @@ export interface Merchant {
     storeName: string;
     phone: string;
     password: string;
+    isActive: boolean;
   }
-  
